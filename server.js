@@ -23,22 +23,27 @@ app.get("/api/hello", function (req, res) {
     res.json({greeting: 'hello API'});
 });
 app.get("/api/", function (req, res) {
+    const stamp =Date.now();
     res.json(res.json({
-        unix: Math.floor(new Date).toString(),
-        utc: new Date().toUTCString()
+        unix: stamp.getTime(),
+        utc: stamp.toUTCString()
     }));
 });
 //endpoint  timeStamp
 app.get("/api/:date", (req, res) => {
 
     const regexpdate = new RegExp('^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}');
+    const regexDateAlternative = new RegExp('^[a-zA-Z]+ [0-9]{1,2}, [0-9]+')
     const regexunix = new RegExp('[0,9].');
-    const fecha = new Date(req.params.date);
-    if (regexpdate.test(req.params.date)) {
 
-        const unix = Math.floor(fecha);
+    const fecha = new Date(req.params.date);
+
+    if (regexpdate.test(req.params.date)||regexDateAlternative.test(req.params.date)) {
+
+        const unix = fecha.getTime();
+
         res.json({
-            unix: unix.toString(),
+            unix: unix,
             utc: fecha.toUTCString()
         })
     } else if (regexunix.test(req.params.date)) {
