@@ -40,8 +40,8 @@ app.get("/api/:date", (req, res) => {
 
     const fecha = new Date(req.params.date);
 
-    console.log(fecha.getTime())
-    if (regexpdate.test(req.params.date) || regexDateAlternative.test(req.params.date) || fecha.getTime() != NaN) {
+
+    if (regexpdate.test(req.params.date) || regexDateAlternative.test(req.params.date) || !isNaN(fecha.getTime())) {
 
         const unix = fecha.getTime();
 
