@@ -26,14 +26,14 @@ app.get("/api/hello", function (req, res) {
 //endpoint  timeStamp
 app.get("/api/:date", (req, res) => {
 
-    const regexpdate = new RegExp('^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$');
+    const regexpdate = new RegExp('^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}');
     const regexunix = new RegExp('[0,9].');
-
+    const fecha = new Date(req.params.date);
     if (regexpdate.test(req.params.date)) {
-        const fecha = new Date(req.params.date);
+
         const unix = Math.floor(fecha);
         res.json({
-            unix: unix,
+            unix: unix.toString(),
             utc: fecha.toUTCString()
         })
     } else if (regexunix.test(req.params.date)) {
