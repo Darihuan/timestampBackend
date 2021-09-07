@@ -22,7 +22,12 @@ app.get("/", function (req, res) {
 app.get("/api/hello", function (req, res) {
     res.json({greeting: 'hello API'});
 });
-
+app.get("/api/", function (req, res) {
+    res.json(res.json({
+        unix: Math.floor(new Date).toString(),
+        utc: new Date().toUTCString()
+    }));
+});
 //endpoint  timeStamp
 app.get("/api/:date", (req, res) => {
 
