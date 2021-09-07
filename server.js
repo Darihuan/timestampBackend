@@ -50,9 +50,10 @@ app.get("/api/:date", (req, res) => {
         })
     } else if (regexunix.test(req.params.date)) {
         const fechaFromUnix = new Date(parseInt(req.params.date));
+        const unix=parseInt(req.params.date);
 
         res.json({
-            unix: req.params.date,
+            unix: unix,
             utc: fechaFromUnix.toUTCString()
         });
 
