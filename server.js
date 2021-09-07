@@ -40,7 +40,8 @@ app.get("/api/:date", (req, res) => {
 
     const fecha = new Date(req.params.date);
 
-    if (regexpdate.test(req.params.date) || regexDateAlternative.test(req.params.date)) {
+    console.log(fecha.getTime())
+    if (regexpdate.test(req.params.date) || regexDateAlternative.test(req.params.date) || fecha.getTime() != NaN) {
 
         const unix = fecha.getTime();
 
@@ -50,7 +51,7 @@ app.get("/api/:date", (req, res) => {
         })
     } else if (regexunix.test(req.params.date)) {
         const fechaFromUnix = new Date(parseInt(req.params.date));
-        const unix=parseInt(req.params.date);
+        const unix = parseInt(req.params.date);
 
         res.json({
             unix: unix,
